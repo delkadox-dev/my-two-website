@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ระบบบริหารจัดการงานสอบบัญชี - สำนักงานปลัดกระทรวงสาธารณสุข</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    
     <style>
         /* 🎨 ตั้งค่าพื้นฐาน (โทนสีเขียวสาธารณสุข & เทา-น้ำเงินทางการ) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Sarabun', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Sarabun', Arial, sans-serif;
         }
 
         body {
@@ -23,29 +27,32 @@
             background: linear-gradient(135deg, #004d40, #00796b); /* สีเขียว Pine Green ของกระทรวงสาธารณสุข */
             color: white;
             text-align: center;
-            padding: 60px 20px 80px 20px; /* 📌 เพิ่ม Padding ด้านล่างเป็น 80px เพื่อเผื่อพื้นที่ให้กล่องเกย */
+            padding: 60px 20px 80px 20px; /* เพิ่ม Padding ด้านล่างเพื่อเผื่อพื้นที่ให้กล่องเกย */
             position: relative;
             border-bottom: 5px solid #d4af37; /* เส้นขอบล่างสีทอง เพิ่มความน่าเชื่อถือ */
         }
 
-        /* จำลองตราสัญลักษณ์วงกลมแบบกระทรวง */
-        .emblem-placeholder {
-            width: 80px;
-            height: 80px;
-            background-color: rgba(255, 255, 255, 0.15);
-            border: 2px solid #d4af37;
-            border-radius: 50%;
+        /* 📌 ส่วนแสดงโลโก้ตรากระทรวงสาธารณสุข */
+        .emblem-container {
+            width: 100px;
+            height: 100px;
             margin: 0 auto 15px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+        }
+
+        .emblem-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.3));
         }
 
         .banner h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-weight: 600;
             letter-spacing: 0.5px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
@@ -59,7 +66,7 @@
         /* 🗂️ ส่วนจัดวางกล่องกระบวนการสอบบัญชี (Grid Layout) */
         .container {
             max-width: 1200px;
-            margin: -40px auto 40px auto; /* 📌 ปรับให้เกยกำลังดี ไม่ทับตัวอักษรหัวเว็บ */
+            margin: -40px auto 40px auto; /* ปรับให้เกยกำลังดี ไม่ทับตัวอักษรหัวเว็บ */
             padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -71,7 +78,7 @@
         /* 📱 ระบบ Responsive ปรับหน้าจอตามอุปกรณ์ */
         @media (max-width: 950px) {
             .container { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
-            .banner { padding-bottom: 40px; } /* ลดระยะห่างในจอเล็กลง */
+            .banner { padding-bottom: 40px; }
         }
         @media (max-width: 650px) {
             .container { grid-template-columns: 1fr; margin-top: 20px; }
@@ -83,7 +90,7 @@
         /* 📦 ตกแต่งกล่องกระบวนการ (Card) */
         .card {
             background: white;
-            border-radius: 8px; /* ขอบเหลี่ยมสไตล์ทางการขึ้นนิดนึง */
+            border-radius: 8px;
             padding: 25px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             text-decoration: none;
@@ -118,7 +125,7 @@
             color: #004d40;
             padding: 3px 10px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .card-icon {
@@ -128,7 +135,7 @@
 
         .card-title {
             font-size: 1.25rem;
-            font-weight: bold;
+            font-weight: 700;
             color: #004d40;
             margin-bottom: 8px;
         }
@@ -146,7 +153,7 @@
             align-items: center;
             font-size: 0.85rem;
             color: #00796b;
-            font-weight: bold;
+            font-weight: 600;
             border-top: 1px solid #f0f0f0;
             padding-top: 15px;
         }
@@ -157,7 +164,7 @@
 
         /* 📞 ส่วนลงนามและติดต่อผู้ตรวจสอบด้านล่าง */
         .footer-contact {
-            max-width: 750px;
+            max-width: 800px;
             margin: 50px auto;
             background: white;
             padding: 20px 40px;
@@ -166,9 +173,18 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             border: 1px solid #e0e0e0;
             border-top: 3px solid #004d40;
+        }
+
+        @media (max-width: 650px) {
+            .footer-contact {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 20px;
+            }
         }
 
         .contact-info b {
@@ -179,7 +195,9 @@
 <body>
 
     <div class="banner">
-        <div class="emblem-placeholder">⚕️</div>
+        <div class="emblem-container">
+            <img src="image_bfd607.jpg" alt="ตรากระทรวงสาธารณสุข" class="emblem-img" onerror="this.style.display='none'; this.parentNode.innerHTML='⚕️'; this.parentNode.style.fontSize='40px'">
+        </div>
         <h1>ระบบจัดเก็บเอกสารและกระบวนการสอบบัญชี</h1>
         <p>การตรวจสอบรายงานการเงิน | สำนักงานปลัดกระทรวงสาธารณสุข</p>
     </div>
@@ -222,7 +240,7 @@
                     <span class="card-step">STEP 3</span>
                     <span class="card-icon">📊</span>
                 </div>
-                <div class="card-title">การวิเคราะห์เปรียบเทียบ</div>
+                <div class="card-title">การวิเคราะห์เปรียบเทียบขั้นต้น</div>
                 <div class="card-desc">กระดาษทำการวิเคราะห์เปรียบเทียบงบทดลอง (Analytical Procedures) รายการงบดุลและงบรายจ่ายของสำนักงานปลัด</div>
             </div>
             <div class="card-footer">
@@ -271,7 +289,7 @@
                 <div class="card-desc">ร่างรายงานผลการตรวจสอบรายงานการเงิน ข้อเสนอแนะแก่ผู้บริหาร และข้อทักท้วงเพื่อการปรับปรุงรายงานการเงิน สป.สธ.</div>
             </div>
             <div class="card-footer">
-                <span>ดูรายงานของผู้สอบบัญชีและรายงานการเงิน</span>
+                <span>รายงานของผู้สอบบัญชีและรายงานการเงิน</span>
                 <span>➔</span>
             </div>
         </a>
@@ -280,10 +298,10 @@
 
     <div class="footer-contact">
         <div class="contact-info">
-            🟢 <b>หัวหน้าผู้ตรวจสอบ:</b> วิสุทธิ์ เรืองอินทร์
+            🟢 <b>ผู้ตรวจสอบ:</b> วิสุทธิ์ เรืองอินทร์
         </div>
         <div class="contact-info">
-            📞 <b>เบอร์โทรมือถือ:</b> 091-059-6437 
+            📞 <b>เบอร์โทรมือถือ:</b> 091-059-6xxx
         </div>
     </div>
 
